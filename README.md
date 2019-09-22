@@ -1,6 +1,6 @@
 # emby_backup.py
 ### **Requires python 3** 
-Python script to backup Emby media server.
+Python script to backup Emby media server to a compressed archive.
 
 ## Usage
 ```
