@@ -7,15 +7,14 @@ import zipfile
 import glob
 from subprocess import run
 
-from justlog import justlog, settings
-from justlog.classes import Severity, Output, Format
-
 parser = argparse.ArgumentParser()
+parser.add_argument("-v", "--version", help="Gives the current version of the script")
 parser.add_argument("-d", "--destination", help="Destination folder for backup", required=True)
-parser.add_argument("-k", "--keep", help="Days to keep archives.", type=int, default=5)
-parser.add_argument("-s", "--systempath", help="Emby's system path", default="/var/lib/emby")
+parser.add_argument("-k", "--keep", help="Number of saved archives. If you are backing up metadata (see below) it's recommended to keep this number relatively low to avoid filling up your Synology with unnecessarily large files. The default is five.", type=int, default=5)
+parser.add_argument("-s", "--systempath", help="Jellyfin's system path", default="/volume1/docker/jellyfin")
 parser.add_argument("-o", "--other", help="Additional file to include. Can be repeated", action='append')
 parser.add_argument("-c", "--oncompletion", help="Command to execute on completion.")
+parser.add_argument("-m", "--metadata", help="This will also back up the Jellyfin metadata folder. Use this option with caution, as including metadata can be both slow and will dramatically increase the size of the backup files. A better, faster option is storing metadata with the files in the form of .NFO and associated image files.", default=0)
 
 args = parser.parse_args()
 
