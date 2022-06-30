@@ -1,5 +1,5 @@
-# jellyfinbackup.py
-### **This Script Requires Python 3 on Synology DSM7** 
+# jellyfin_config_backup.py
+### **This Script Requires Python 3 and is designed for Synology DSM7** 
 This script backs up a Jellyfin server configuration running in a Docker container on Synology DSM7. It is designed only to back up the configuration files in the event of corruption or deletion. It *is not* meant to backup your entire Jellyfin media folder.
 
 This works best if you have a static data folder for your Jellyfin container. Otherwise, you'll need to find out the hash for your data container. Additionally updating the container without a static data location will mean the hash will change, and you'll need to update your script. So it's always recommended to use a static data folder.
@@ -15,7 +15,7 @@ You must be logged into your Synology via SSH and have Sudo priveledges:
 
 [How to access DSM via SSH](https://kb.synology.com/en-ca/DSM/tutorial/How_to_login_to_DSM_with_root_permission_via_SSH_Telnet "SSH Instructions for Synology DSM")
 
-## Script installation
+## Script Installation
 This is a one-step command-line install. 
 ```
 wget -O - https://raw.githubusercontent.com/zang74/jellyfin_backup/master/installscript.sh | bash
@@ -29,7 +29,7 @@ chmod +x jellyfin_config_backup.py
 ./jellyfin_config_backup.py -h
 ```
 
-## USAGE
+## Usage
 
 - "-v", "--version",
   - Gives the current version of the script.
