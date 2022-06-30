@@ -17,9 +17,13 @@ You must be logged into your Synology via SSH and have Sudo priveledges:
 
 ## Script Installation
 This is a one-step command-line install. 
+
+SSH into your Synology, switch to root and cut & paste the following: 
 ```
-wget -O - https://raw.githubusercontent.com/zang74/jellyfin_backup/master/installscript.sh | bash
+mkdir /volume1/.scripts/ && wget -O /volume1/.scripts/jellyfin_config_backup.py https://raw.githubusercontent.com/zang74/jellyfin_backup/master/jellyfin_config_backup.py
 ```
+Setting it up to auto-run is performed within the DSM UI and instructions are in the wiki. 
+
 ## GIT Installation
 This requires the GIT package be installed on your DSM from the Synology Package Center. If you install in this method, make sure you remember where you put it; it'll be important for later. I recommend creating and installing to /volume1/.scripts/.
 ```
