@@ -8,10 +8,10 @@ Credit to Gabisonfire for the original emby_backup from which this is based.
 
 ## How It Works
 
-The script is pretty simple. It copies files to a temporary directory, compresses the file and saves that file in the destination folder. It then proceeds to delete old backups so that you have a preset number remaining.
+The script is pretty simple. It copies a slightly-customizable list of Jellyfin config files to a temporary directory, compresses the directory and saves that a .zip file in the destination folder. It then proceeds to delete old backups so that you have a customizable number remaining.
 
-## NOTE
-You must be logged into your Synology via SSH and have Sudo priveledges:
+## Note
+You must be logged into your Synology via SSH and have Sudo priviledges:
 
 [How to access DSM via SSH](https://kb.synology.com/en-ca/DSM/tutorial/How_to_login_to_DSM_with_root_permission_via_SSH_Telnet "SSH Instructions for Synology DSM")
 
@@ -58,3 +58,6 @@ python3 /volume1/.scripts/jellyfin_config_backup.py -d "/path/to/jellyfin/data/"
 python3 /volume1/.scripts/jellyfin_config_backup.py -d "/path/to/jellyfin/data/" -k 3
 
 ```
+## Warning
+
+I'm serious about avoiding a backup of the metadata directorym which is why it's off by default. On my own system, what is a 62MiB file easily balloons to almost 3GiB if I add metadata. If you're backing up even a couple of times a week, this can easily become a big problem, shrinking your filespace dramatically and repeatedly creating huge files of almost entirely the same data.
