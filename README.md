@@ -20,7 +20,7 @@ This is a one-step command-line install.
 
 SSH into your Synology, switch to root and cut & paste the following: 
 ```
-mkdir /volume1/.scripts/ && wget -O /volume1/.scripts/jellyfin_config_backup.py https://raw.githubusercontent.com/zang74/jellyfin_backup/master/jellyfin_config_backup.py
+mkdir /volume1/.scripts/ && wget -O /volume1/.scripts/jellyfin_config_backup.py https://raw.githubusercontent.com/zang74/jellyfin_backup/master/jellyfin_config_backup.py && chmod +x /volume1/.scripts/jellyfin_config_backup.py
 ```
 Setting it up to auto-run is performed within the DSM UI and instructions are in the wiki. 
 
