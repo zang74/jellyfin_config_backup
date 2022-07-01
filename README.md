@@ -33,6 +33,10 @@ chmod +x jellyfin_config_backup.py
 ./jellyfin_config_backup.py -h
 ```
 
+## Getting the Synology to use it
+
+[There's an easy visual guide in the Wiki](https://github.com/zang74/jellyfin_config_backup/wiki/Setting-up-Synology-Task-Scheduler)
+
 ## Usage
 
 - "-v", "--version",
@@ -61,3 +65,9 @@ python3 /volume1/.scripts/jellyfin_config_backup.py -d "/path/to/backup/destinat
 ## Warning
 
 I'm serious about avoiding a backup of the metadata directory. That's why it's off by default. On my own system, what is a 62MiB file easily balloons to almost 3GiB if I add metadata. If you're backing up even a couple of times a week, this can easily become a big problem, shrinking your filespace dramatically and repeatedly creating huge files of almost entirely the same data.
+
+## Note
+
+If you've set up Jellyfin without static data directories, your config and cache folders will exist in random-hash-named directories under volume1/@docker/containers. Every time your Jellyfin Docker Container needs to be updated, a new random-hash-named directory will be created leaving the old one sitting there to rot. This will break the functionality of both Jellyfin Config Backup *and* the Jellyfin Media Server. Every new update to Jellyfin will act like an out-of-the-box server. If you plan on updating Jellyfin, you should set it up with static directories.
+
+[A simple guide can be found here](https://mariushosting.com/how-to-install-jellyfin-on-your-synology-nas/)
