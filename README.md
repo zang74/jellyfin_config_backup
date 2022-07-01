@@ -60,4 +60,4 @@ python3 /volume1/.scripts/jellyfin_config_backup.py -d "/path/to/backup/destinat
 ```
 ## Warning
 
-I'm serious about avoiding a backup of the metadata directorym which is why it's off by default. On my own system, what is a 62MiB file easily balloons to almost 3GiB if I add metadata. If you're backing up even a couple of times a week, this can easily become a big problem, shrinking your filespace dramatically and repeatedly creating huge files of almost entirely the same data.
+I'm serious about avoiding a backup of the metadata directory. That's why it's off by default. On my own system, what is a 62MiB file easily balloons to almost 3GiB if I add metadata. If you're backing up even a couple of times a week, this can easily become a big problem, shrinking your filespace dramatically and repeatedly creating huge files of almost entirely the same data.
