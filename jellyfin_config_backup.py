@@ -122,7 +122,7 @@ def build_archive():
       continue
     shutil.copytree(f"{datapath}/{folder}", f"{tempdir}/{folder}")
 
-  now = datetime.datetime.now().strftime("%Y-%m-%d_%H.%M.%P")
+  now = datetime.datetime.now().strftime("%Y-%m-%d_%H%M")
   zip = zipfile.ZipFile(f"{backupdest}/jellyfin_config_backup_{now}.zip", 'w', zipfile.ZIP_DEFLATED)
   zipdir(tempdir, zip)
   zip.close()
