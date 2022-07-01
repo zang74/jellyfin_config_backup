@@ -9,7 +9,7 @@ from subprocess import run
 import logging
 from logging.handlers import RotatingFileHandler
 
-version = "1.0b"
+version = "1.0"
 
 parser = argparse.ArgumentParser()
 parser.add_argument("-v", "--version", dest="getversion", help="Gives the current version of the script.", default=False, action='store_true')
