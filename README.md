@@ -1,4 +1,5 @@
-# jellyfin_config_backup.py
+# Jellyfin Config Backup (for Docker on Synology)
+## jellyfin_config_backup.py
 ### **This Script Requires Python 3 and is designed for Synology DSM7** 
 This script backs up a Jellyfin server configuration running in a Docker container on Synology DSM7. It is designed only to back up the configuration files in the event of corruption or deletion. It *is not* meant to backup your entire Jellyfin media folder.
 
