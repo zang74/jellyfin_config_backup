@@ -4,6 +4,8 @@ This script backs up a Jellyfin server configuration running in a Docker contain
 
 This works best if you have a static data folder for your Jellyfin container. Otherwise, you'll need to find out the hash for your data container. Additionally updating the container without a static data location will mean the hash will change, and you'll need to update your script. So it's always recommended to use a static data folder.
 
+It's also recommended that keep both your Jellyfin config and script locations separate and *outside* of network shares (`'/volume1/docker/jellyfin/config'` and  `'/volume1/.scripts/'` respectively), simply for security and stability reasons. Having your Jellyfin config accessible via network share is one more point of failure. Anything gets deleted or changed by anything outside of the Jellyfin server and things may be borked. `'/volume1/.scripts'` is a non-standard recommended location for a reason. 
+
 Credit to [Gabisonfire](https://github.com/Gabisonfire/emby_backup) for the original emby_backup from which this is based.
 
 ## How It Works
@@ -14,6 +16,7 @@ The script is pretty simple. It copies a slightly-customizable list of Jellyfin 
 You must be logged into your Synology via SSH and have Sudo priviledges:
 
 [How to access DSM via SSH](https://kb.synology.com/en-ca/DSM/tutorial/How_to_login_to_DSM_with_root_permission_via_SSH_Telnet "SSH Instructions for Synology DSM")
+
 
 ## Script Installation
 This is a one-step command-line install. It is meant to be run as Root.
