@@ -4,7 +4,7 @@ This script backs up a Jellyfin server configuration running in a Docker contain
 
 This works best if you have a static data folder for your Jellyfin container. Otherwise, you'll need to find out the hash for your data container. Additionally updating the container without a static data location will mean the hash will change, and you'll need to update your script. So it's always recommended to use a static data folder.
 
-It's also recommended that keep both your static Jellyfin config and script locations separate and *outside* of network shares (`'/volume1/docker/jellyfin/config'` and  `'/volume1/.scripts/'` respectively), simply for security and stability reasons. Having your Jellyfin config accessible via network share is one more point of failure. `'/volume1/.scripts'` is a non-standard recommended location for a reason. As wel, if anything in your Jellyfin config gets deleted or changed by anything but the Jellyfin server and things may be borked and your server may.  
+It's also recommended that keep both your static Jellyfin config and script locations separate and *outside* of network shares (`'/volume1/docker/jellyfin/config'` and  `'/volume1/.scripts/'` respectively), simply for security and stability reasons. Having your Jellyfin config accessible via network share is one more point of failure. `'/volume1/.scripts'` is a non-standard recommended location for a reason. As well, if anything in your Jellyfin config gets deleted or changed by anything but the Jellyfin server and things may be borked and your server may.  
 
 Credit to [Gabisonfire](https://github.com/Gabisonfire/emby_backup) for the original emby_backup from which this is based.
 
