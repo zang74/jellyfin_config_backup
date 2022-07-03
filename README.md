@@ -48,7 +48,7 @@ chmod +x jellyfin_config_backup.py
 - "-k", "--keep",
   - [Optional] Number of saved archives. If you are backing up metadata (see below) it's recommended to keep this number relatively low to avoid filling up your Synology with unnecessarily large files. The default is five.
 - "-o", "--other",
-  - [Optional] Additional file(s) to include. Can be repeated once per file.
+  - [Optional] Additional file(s) to include. Can be repeated per file.
 - "-m", "--metadata",
   - [Optional] This will also back up the Jellyfin metadata folder and is off by default. Use this option with caution, as including metadata can be both slow and will dramatically increase the size of the backup files. A better, faster option is storing metadata alongside media files in the form of .NFO and associated image files and doing regular incremental backups of your media file directories.
 - "-l", "--logfile",
