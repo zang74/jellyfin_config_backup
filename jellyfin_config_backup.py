@@ -106,7 +106,7 @@ def zipdir(path, ziph):
   for root, dirs, files in os.walk(path):
     for file in files:
       path = os.path.join(root, file)
-      name_dest = os.path.relpath(os.path.join(root, file), 'jf_bkp_temp')            
+      name_dest = os.path.relpath(os.path.join(root, file), 'jfcfg_bkp_temp')            
       ziph.write(path, f"jellyfin/{name_dest}")
 
 def build_archive():
