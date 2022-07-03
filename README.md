@@ -4,7 +4,7 @@ This script backs up a Jellyfin server configuration running in a Docker contain
 
 This works best if you have a static data folder for your Jellyfin container. Otherwise, you'll need to find out the hash for your data container. Additionally updating the container without a static data location will mean the hash will change, and you'll need to update your script. So it's always recommended to use a static data folder.
 
-Credit to Gabisonfire for the original emby_backup from which this is based.
+Credit to [Gabisonfire](https://github.com/Gabisonfire/emby_backup) for the original emby_backup from which this is based.
 
 ## How It Works
 
