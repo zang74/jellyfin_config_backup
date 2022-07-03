@@ -16,16 +16,16 @@ You must be logged into your Synology via SSH and have Sudo priviledges:
 [How to access DSM via SSH](https://kb.synology.com/en-ca/DSM/tutorial/How_to_login_to_DSM_with_root_permission_via_SSH_Telnet "SSH Instructions for Synology DSM")
 
 ## Script Installation
-This is a one-step command-line install. 
+This is a one-step command-line install. It is meant to be run as Root.
 
-SSH into your Synology, switch to root and cut & paste the following: 
+SSH into your Synology with an account with proper priviledges, switch user to Root (`sudo su -l` and enter your password) and cut & paste the following: 
 ```
 mkdir /volume1/.scripts/ && wget -O /volume1/.scripts/jellyfin_config_backup.py https://raw.githubusercontent.com/zang74/jellyfin_backup/master/jellyfin_config_backup.py && chmod +x /volume1/.scripts/jellyfin_config_backup.py
 ```
-Setting it up to auto-run is performed within the DSM UI and instructions are in the wiki. 
+Setting it up to auto-run is performed within the DSM UI and [instructions are in the wiki](https://github.com/zang74/jellyfin_config_backup/wiki/Setting-up-Synology-Task-Scheduler). 
 
 ## GIT Installation
-This requires the GIT package be installed on your DSM from the Synology Package Center. If you install in this method, make sure you remember where you put it; it'll be important for later. I recommend creating and installing to /volume1/.scripts/.
+This requires the GIT package be installed on your DSM from the Synology Package Center. It assumes you know more than just the basics on Linux privileges and command-line arguments, and can move files via command-line to where you want them to live. I've added it simply because many might not be cool with the idea of auto-running a script from the internet. If you install in this method, make sure you remember where you put it; it'll be important for later. I recommend creating and installing to /volume1/.scripts/.
 ```
 git clone git@github.com:zang74/jellyfin_config_backup.git
 cd jellyfin_config_backup
