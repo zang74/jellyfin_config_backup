@@ -2,6 +2,7 @@
 import argparse
 import shutil
 import os
+import getpass
 import datetime
 import zipfile
 import glob
@@ -9,7 +10,7 @@ from subprocess import run
 import logging
 from logging.handlers import RotatingFileHandler
 
-version = "1.0b"
+version = "1.1b"
 
 parser = argparse.ArgumentParser()
 parser.add_argument("-v", "--version", dest="getversion", help="Gives the current version of the script.", default=False, action='store_true')
@@ -31,7 +32,8 @@ metadata = args.metadata
 keepbackups = args.keepbackups
 devicehash = args.devicehash
 optionalfiles = args.optionalfile
-
+scriptuser = getpass.getuser()
+scriptuserpath = "/var/services/homes/" + scriptuser
 
 # Show version number and quit
 
@@ -43,7 +45,10 @@ if not backupdest:
 	print ("A backup destination is a required.")
 	exit()
 # Folders to back up
-
+if not os.path.isdir(scriptuserpath):
+	print ("No user home directory exists. Please use an active user with a home directory.")
+	exit()
+	
 folders = ['config', 'plugins', 'data/subtitles', 'data/collections', 'data/playlists']
 
 if metadata:
@@ -62,7 +67,7 @@ if devicehash:
 
 scriptpath = os.path.abspath(os.path.dirname(__file__))
 tempdir = scriptpath + "/jfcfg_bkp_temp"
-defaultlogloc = "/var/log/jellyfin_config_backup.log"
+defaultlogloc = scriptpath + "/jellyfin_config_backup.log"
 
 #Set Up Logger
 
@@ -76,7 +81,7 @@ log_format = logging.Formatter('%(asctime)s %(levelname)s %(message)s')
 log_handler = RotatingFileHandler(logfileloc, mode='a', maxBytes=3145728, backupCount=2, encoding=None, delay=0)
 log_handler.setFormatter(log_format)
 log_handler.setLevel(logging.INFO)
-thislog = logging.getLogger('root')
+thislog = logging.getLogger(scriptuser)
 thislog.setLevel(logging.INFO)
 thislog.addHandler(log_handler)
 
