@@ -23,7 +23,7 @@ This is a one-step command-line install. It is meant to be run as Root.
 
 SSH into your Synology with an account with proper priviledges, switch user to Root (`sudo su -l` and enter your password) and cut & paste the following: 
 ```
-mkdir -p /volume1/.scripts/ && wget -O /volume1/.scripts/jellyfin_config_backup.py https://raw.githubusercontent.com/zang74/jellyfin_backup/master/jellyfin_config_backup.py && chmod +x /volume1/.scripts/jellyfin_config_backup.py
+mkdir -p /volume1/.scripts/ && wget -O /volume1/.scripts/jellyfin_config_backup.py https://raw.githubusercontent.com/zang74/jellyfin_backup/master/jellyfin_config_backup.py && chmod +x /volume1/.scripts/jellyfin_config_backup.py && exit
 ```
 Setting it up to auto-run is performed within the DSM UI and [instructions are in the wiki](https://github.com/zang74/jellyfin_config_backup/wiki/Setting-up-Synology-Task-Scheduler). 
 
