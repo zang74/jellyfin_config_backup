@@ -14,7 +14,7 @@ version = "1.1b"
 
 parser = argparse.ArgumentParser()
 parser.add_argument("-v", "--version", dest="getversion", help="Gives the current version of the script.", default=False, action='store_true')
-parser.add_argument("-p", "--datapath", dest="datapath",  help="Jellyfin's data container path.", default="/volume1/docker/jellyfin")
+parser.add_argument("-p", "--datapath", dest="datapath",  help="Jellyfin's data container path.", default="/volume1/docker/jellyfin/config")
 parser.add_argument("-d", "--destination", dest="backupdest", help="Destination folder for backups.")
 parser.add_argument("-k", "--keep", dest="keepbackups", help="Number of saved archives. If you are backing up metadata (see below) it's recommended to keep this number relatively low to avoid filling up your Synology with unnecessarily large files. The default is five.", type=int, default=5)
 parser.add_argument("-o", "--optionalfile",  dest="optionalfile", help="Additional file(s) to include. Can be repeated per file.", action='append')
@@ -34,20 +34,13 @@ devicehash = args.devicehash
 optionalfiles = args.optionalfile
 scriptuser = getpass.getuser()
 scriptuserpath = "/var/services/homes/" + scriptuser
-
+skipahead = ""
 # Show version number and quit
 
 if showversion:
 	print (f"Jellyfin Config Backup v{version} by Zang74\nhttps://github.com/zang74/jellyfin_backup")
 	exit()
 
-if not backupdest:
-	print ("A backup destination is a required.")
-	exit()
-# Folders to back up
-if not os.path.isdir(scriptuserpath):
-	print ("No user home directory exists. Please use an active user with a home directory.")
-	exit()
 	
 folders = ['config', 'plugins', 'data/subtitles', 'data/collections', 'data/playlists']
 
@@ -72,11 +65,13 @@ defaultlogloc = scriptpath + "/jellyfin_config_backup.log"
 #Set Up Logger
 
 ## Check if logfile location is legit
-if optlogfileloc and os.path.isdir(os.path.dirname(optlogfileloc)):
-  logfileloc = optlogfileloc
-else: 
+if optlogfileloc and os.access(optlogfileloc, os.R_OK):
+  print(f"You don't have write permissions to '{optlogfileloc}' or it doesn't exist. Exiting.")
+  exit()
+else:
   logfileloc = defaultlogloc
-	
+
+
 log_format = logging.Formatter('%(asctime)s %(levelname)s %(message)s')
 log_handler = RotatingFileHandler(logfileloc, mode='a', maxBytes=3145728, backupCount=2, encoding=None, delay=0)
 log_handler.setFormatter(log_format)
@@ -85,13 +80,28 @@ thislog = logging.getLogger(scriptuser)
 thislog.setLevel(logging.INFO)
 thislog.addHandler(log_handler)
 
-
 thislog.info(f"Logs to be saved to {logfileloc}")
 
+
+if not os.path.isdir(scriptuserpath):
+	print ("No user home directory exists. Please use an active user with a home directory.")
+	exit()
+
 def intro():
+  #Just adds the intro to the log file.
   thislog.info(f"---- Jellyfin backup script version {version} ----")
 
+def writechecks():
+  if not backupdest:
+    print ("A backup destination is a required.")
+    exit()
+
+  if os.access(backupdest, os.W_OK) is False:
+    print (f"You don't have the proper permissions to write a back up to {backupdest}")
+    exit()
+
 def preflight_check():
+
   if os.path.isdir(tempdir):
     thislog.info(f"{tempdir} was not cleaned last run, deleting.")
     shutil.rmtree(f'{tempdir}')
@@ -178,6 +188,7 @@ def endall():
     os.chmod(logfileloc, 0o664)
 
 intro()
+writechecks()
 preflight_check()
 build_archive()
 rotate()
