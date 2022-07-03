@@ -28,7 +28,7 @@ mkdir -p /volume1/.scripts/ && wget -O /volume1/.scripts/jellyfin_config_backup.
 Setting it up to auto-run is performed within the DSM UI and [instructions are in the wiki](https://github.com/zang74/jellyfin_config_backup/wiki/Setting-up-Synology-Task-Scheduler). 
 
 ## GIT Installation
-This requires the GIT package be installed on your DSM from the Synology Package Center. It assumes you know more than just the basics on Linux privileges and command-line arguments, and can move files via command-line to where you want them to live. I've added it simply because many might not be cool with the idea of auto-running a script from the internet. If you install in this method, make sure you remember where you put it; it'll be important for later. I recommend creating and installing to /volume1/.scripts/.
+This requires the GIT package be installed on your DSM from the Synology Package Center. It assumes you know more than just the basics on Linux privileges and command-line arguments, and can move files via command-line to where you want them to live. I've added it simply because many might not be cool with the idea of running a one-liner command from the internet. If you install in this method, make sure you remember where you put it; it'll be important for later. I recommend creating and installing to /volume1/.scripts/.
 ```
 git clone git@github.com:zang74/jellyfin_config_backup.git
 cd jellyfin_config_backup
