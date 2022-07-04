@@ -25,7 +25,7 @@ The script is pretty simple. It copies a slightly-customizable list of Jellyfin 
 - "-v", "--version",
   - Gives the current version of the script.
 - "-c", "--configpath",
-  - Jellyfin's data container path. It defaults to /volume1/docker/jellyfin".
+  - Jellyfin's data container config path. It defaults to /volume1/docker/jellyfin/config".
 - "-d", "--destination",
   - Destination folder for backups. This is required.
 - "-k", "--keep",
