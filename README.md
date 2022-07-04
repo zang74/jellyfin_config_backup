@@ -20,7 +20,7 @@ You must be logged into your Synology via SSH:
 
 ## Script Installation
 
-[Instructions can be found here](https://github.com/zang74/jellyfin_config_backup/wiki/Installation "Installation instructions.")
+[Different flavours of installation can be found here](https://github.com/zang74/jellyfin_config_backup/wiki/Installation "Installation instructions.")
 
 ## Getting the Synology to use it
 
