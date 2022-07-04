@@ -13,7 +13,7 @@ Credit to [Gabisonfire](https://github.com/Gabisonfire/emby_backup) for the orig
 The script is pretty simple. It copies a slightly-customizable list of Jellyfin config files to a temporary directory, compresses the directory and saves that a .zip file in the destination folder. It then proceeds to delete old backups so that you have a customizable number remaining.
 
 ## Note
-You must be logged into your Synology via SSH and have Sudo privileges:
+You must be logged into your Synology via SSH:
 
 [How to access DSM via SSH](https://kb.synology.com/en-ca/DSM/tutorial/How_to_login_to_DSM_with_root_permission_via_SSH_Telnet "SSH Instructions for Synology DSM")
 
