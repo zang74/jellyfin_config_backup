@@ -19,22 +19,8 @@ You must be logged into your Synology via SSH:
 
 
 ## Script Installation
-This is a one-step command-line install. It is meant to be run in userspace, but requires read permissions for the jellyfin config, as well as save locations. That means the account using the script needs permissions for both the jellyfin config, as well as the destination and (optional) logfile locations.
 
-SSH into your Synology with a user account with privileges, and cut & paste the following: 
-```
-mkdir -p ~/scripts/ && wget -O ~/scripts/jellyfin_config_backup.py https://raw.githubusercontent.com/zang74/jellyfin_backup/master/jellyfin_config_backup.py && chmod +x ~/scripts/jellyfin_config_backup.py
-```
-Setting it up to auto-run is performed within the DSM UI and [instructions are in the wiki](https://github.com/zang74/jellyfin_config_backup/wiki/Setting-up-Synology-Task-Scheduler). 
-
-## GIT Installation
-This requires the GIT package be installed on your DSM from the Synology Package Center. This method assumes you know more than just the basics on Linux privileges and command-line arguments, and can move files via command-line to where you want them to live. I've added it simply because many might not be cool with the idea of running a one-liner command from the internet. If you install in this method, make sure you remember where you put it; it'll be important for later.
-```
-git clone git@github.com:zang74/jellyfin_config_backup.git
-cd jellyfin_config_backup
-chmod +x jellyfin_config_backup.py
-./jellyfin_config_backup.py -h
-```
+[Instructions can be found here](https://github.com/zang74/jellyfin_config_backup/wiki/Installation "Installation instructions.")
 
 ## Getting the Synology to use it
 
