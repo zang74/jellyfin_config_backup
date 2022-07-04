@@ -4,7 +4,7 @@ This script backs up a Jellyfin server configuration running in a Docker contain
 
 This works best if you have a static data folder for your Jellyfin container. Otherwise, you'll need to find out the hash for your data container. Additionally updating the container without a static data location will mean the hash will change, and you'll need to update your script. So it's always recommended to use a static data folder.
 
-It's also recommended that keep both your static Jellyfin config and script locations separate and *outside* of network shares (`'/volume1/docker/jellyfin/config'` and  `'/volume1/.scripts/'` respectively), simply for security and stability reasons. Having your Jellyfin config accessible via network share is one more point of failure. `'/volume1/.scripts'` is a non-standard recommended location for a reason. As well, if anything in your Jellyfin config gets deleted or changed by anything but the Jellyfin server and things may be borked and your server may.  
+It's also recommended that keep both your static Jellyfin config and script locations separate and *outside* of network shares (`'/volume1/docker/jellyfin/config'` and  `'~/scripts/'` respectively), simply for security and stability reasons. Having your Jellyfin config accessible via network share is one more point of failure. `'/volume1/.scripts'` is a non-standard recommended location for a reason. As well, if anything in your Jellyfin config gets deleted or changed by anything but the Jellyfin server and things may be borked and your server may.  
 
 Credit to [Gabisonfire](https://github.com/Gabisonfire/emby_backup) for the original emby_backup from which this is based.
 
@@ -13,22 +13,22 @@ Credit to [Gabisonfire](https://github.com/Gabisonfire/emby_backup) for the orig
 The script is pretty simple. It copies a slightly-customizable list of Jellyfin config files to a temporary directory, compresses the directory and saves that a .zip file in the destination folder. It then proceeds to delete old backups so that you have a customizable number remaining.
 
 ## Note
-You must be logged into your Synology via SSH and have Sudo priviledges:
+You must be logged into your Synology via SSH and have Sudo privileges:
 
 [How to access DSM via SSH](https://kb.synology.com/en-ca/DSM/tutorial/How_to_login_to_DSM_with_root_permission_via_SSH_Telnet "SSH Instructions for Synology DSM")
 
 
 ## Script Installation
-This is a one-step command-line install. It is meant to be run as Root.
+This is a one-step command-line install. It is meant to be run in userspace, but requires read permissions for the jellyfin config, as well as save locations. That means the account using the script needs permissions for both the jellyfin config, as well as the destination and (optional) logfile locations.
 
-SSH into your Synology with an account with proper priviledges, switch user to Root (`sudo su -l` and enter your password) and cut & paste the following: 
+SSH into your Synology with a user account with privileges, and cut & paste the following: 
 ```
-mkdir -p /volume1/.scripts/ && wget -O /volume1/.scripts/jellyfin_config_backup.py https://raw.githubusercontent.com/zang74/jellyfin_backup/master/jellyfin_config_backup.py && chmod +x /volume1/.scripts/jellyfin_config_backup.py && exit
+mkdir -p ~/scripts/ && wget -O ~/scripts/jellyfin_config_backup.py https://raw.githubusercontent.com/zang74/jellyfin_backup/master/jellyfin_config_backup.py && chmod +x ~/scripts/jellyfin_config_backup.py
 ```
 Setting it up to auto-run is performed within the DSM UI and [instructions are in the wiki](https://github.com/zang74/jellyfin_config_backup/wiki/Setting-up-Synology-Task-Scheduler). 
 
 ## GIT Installation
-This requires the GIT package be installed on your DSM from the Synology Package Center. It assumes you know more than just the basics on Linux privileges and command-line arguments, and can move files via command-line to where you want them to live. I've added it simply because many might not be cool with the idea of running a one-liner command from the internet. If you install in this method, make sure you remember where you put it; it'll be important for later. I recommend creating and installing to /volume1/.scripts/.
+This requires the GIT package be installed on your DSM from the Synology Package Center. This method assumes you know more than just the basics on Linux privileges and command-line arguments, and can move files via command-line to where you want them to live. I've added it simply because many might not be cool with the idea of running a one-liner command from the internet. If you install in this method, make sure you remember where you put it; it'll be important for later.
 ```
 git clone git@github.com:zang74/jellyfin_config_backup.git
 cd jellyfin_config_backup
@@ -44,7 +44,7 @@ chmod +x jellyfin_config_backup.py
 
 - "-v", "--version",
   - Gives the current version of the script.
-- "-p", "--datapath",
+- "-c", "--configpath",
   - Jellyfin's data container path. It defaults to /volume1/docker/jellyfin".
 - "-d", "--destination",
   - Destination folder for backups. This is required.
@@ -61,8 +61,8 @@ chmod +x jellyfin_config_backup.py
 ## Examples
 
 ```
-python3 /volume1/.scripts/jellyfin_config_backup.py -p "/path/to/jellyfin/config/" -d "/path/to/backup/destination/" -o "/etc/additional_file" -o "/some/other/file" -m
-python3 /volume1/.scripts/jellyfin_config_backup.py --datapath "/path/to/jellyfin/config/" --destination "/path/to/backup/destination/" --logfile "/path/to/network/share" --ignoredevicehash
+python3 /volume1/.scripts/jellyfin_config_backup.py -c "/path/to/jellyfin/config/" -d "/path/to/backup/destination/" -o "/etc/additional_file" -o "/some/other/file" -m
+python3 /volume1/.scripts/jellyfin_config_backup.py --configpath "/path/to/jellyfin/config/" --destination "/path/to/backup/destination/" --logfile "/path/to/network/share" --ignoredevicehash
 python3 /volume1/.scripts/jellyfin_config_backup.py -d "/path/to/backup/destination/" -k 3
 ```
 ## Warning
